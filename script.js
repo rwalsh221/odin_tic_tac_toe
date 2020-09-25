@@ -3,7 +3,7 @@
 // add who goes first. start game functio
 
 const log = console.log;
-let currentPlayer = 'p-one';
+let currentPlayer = 'player-one';
 const pos1 = document.getElementById('pos-1');
 const pos2 = document.getElementById('pos-2');
 const pos3 = document.getElementById('pos-3');
@@ -14,6 +14,8 @@ const pos7 = document.getElementById('pos-7');
 const pos8 = document.getElementById('pos-8');
 const pos9 = document.getElementById('pos-9');
 let winner = false
+let playerOneScore = 0;
+let playerTwoScore = 0;
 // let cContains = classList.contains(currentPlayer);
 // log(cContains)
 
@@ -35,13 +37,13 @@ const newPlayerFactory = (name, gamePiece) => {
     return {name, gamePiece};
 };
 
-const createNewPlayer
+// const createNewPlayer
 
 const renderNewPlayer = () => {
     
     log('running')
 
-    const name = `NAME: ${document.getElementById('player-name').value}`
+    const name = document.getElementById('player-name').value
     let gamePiece;
 
     if (document.getElementById('radio-piece-cross').checked === true) {
@@ -55,11 +57,11 @@ const renderNewPlayer = () => {
 }
 
 const nextPlayer = () => {
-    if (currentPlayer === 'p-one') {
-        currentPlayer = 'p-two';
+    if (currentPlayer === 'player-one') {
+        currentPlayer = 'player-two';
         log(currentPlayer)
     } else {
-        currentPlayer = 'p-one';
+        currentPlayer = 'player-one';
         log(currentPlayer)
     }
 }
@@ -81,14 +83,14 @@ const placeGamePiece = (event) => {
     if (winner === false) {
         let posID = event.target.id
         
-        if (currentPlayer === 'p-one' && document.getElementById(posID).classList.contains('game-grid__clear')) {
+        if (currentPlayer === 'player-one' && document.getElementById(posID).classList.contains('game-grid__clear')) {
             
             
             
             document.getElementById(posID).classList.remove('game-grid__clear');
             document.getElementById(posID).classList.add('marker-nought', currentPlayer, 'test');
             checkWin();
-        } else if (currentPlayer === 'p-two' && document.getElementById(posID).classList.contains('game-grid__clear')) {
+        } else if (currentPlayer === 'player-two' && document.getElementById(posID).classList.contains('game-grid__clear')) {
 
             document.getElementById(posID).classList.remove('game-grid__clear');
             document.getElementById(posID).classList.add('marker-cross', currentPlayer, 'test');
@@ -101,10 +103,11 @@ const isWinner = () => {
     winner = true
     setTimeout(function(){
         
-        alert(`${currentPlayer} is the winner`)
+        // alert(`${currentPlayer} is the winner`)
+        alert(`${document.getElementById(`${currentPlayer}__name`).textContent} is the winner`)
         
         
-    },1000);
+    },500);
 
     setTimeout(function(){
         
@@ -113,17 +116,34 @@ const isWinner = () => {
 }
 
 const resetGame = () => {
+
+    if (currentPlayer === 'player-one') {
+        playerOneScore++
+        document.getElementById(`${currentPlayer}__score`).textContent = playerOneScore;
+    } else {
+        playerTwoScore++
+        document.getElementById(`${currentPlayer}__score`).textContent = playerTwoScore;
+    }
+
+    if (currentPlayer === 'player-one') {
+        currentPlayer = 'player-two'
+    } else {
+        currentPlayer = 'player-one'
+    }
+    
     if (winner === true) {
         for(i = 1; i <= 9; i++) {
             // document.getElementById(`pos-${i}`).classList.remove('test');
-            document.getElementById(`pos-${i}`).classList.remove('marker-nought', 'p-one');
+            document.getElementById(`pos-${i}`).classList.remove('marker-nought', 'player-one');
 
-            document.getElementById(`pos-${i}`).classList.remove('marker-cross', 'p-two');
+            document.getElementById(`pos-${i}`).classList.remove('marker-cross', 'player-two');
             document.getElementById(`pos-${i}`).classList.add('game-grid__clear')
 
         }
 
     }
+
+
     winner = false
 }
 
