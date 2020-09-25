@@ -1,3 +1,7 @@
+// add active player example 'player one is the winner'
+// add turn count
+// add who goes first. start game functio
+
 const log = console.log;
 let currentPlayer = 'p-one';
 const pos1 = document.getElementById('pos-1');
@@ -19,6 +23,36 @@ let winner = false
 //         testPlace(event);
 //     }
 // }
+
+
+
+const newPlayerFactory = (name, gamePiece) => {
+    if (gamePiece === 'cross') {
+        document.getElementById('player-one__name').textContent = name;
+    } else {
+        document.getElementById('player-two__name').textContent = name;
+    }
+    return {name, gamePiece};
+};
+
+const createNewPlayer
+
+const renderNewPlayer = () => {
+    
+    log('running')
+
+    const name = `NAME: ${document.getElementById('player-name').value}`
+    let gamePiece;
+
+    if (document.getElementById('radio-piece-cross').checked === true) {
+        // document.getElementById('player-one__name').textContent = name;
+        gamePiece = 'cross'
+    } else {
+        gamePiece = 'nought'
+    }
+
+    newPlayerFactory(name, gamePiece);
+}
 
 const nextPlayer = () => {
     if (currentPlayer === 'p-one') {
@@ -67,7 +101,7 @@ const isWinner = () => {
     winner = true
     setTimeout(function(){
         
-        alert('winner')
+        alert(`${currentPlayer} is the winner`)
         
         
     },1000);
@@ -90,6 +124,7 @@ const resetGame = () => {
         }
 
     }
+    winner = false
 }
 
 const checkWin = () => {
@@ -121,6 +156,11 @@ const checkWin = () => {
     }
 }
 
+
+
 document.querySelector('.game-grid').addEventListener('click', placeGamePiece);
+document.querySelector('.btn__new-player').addEventListener('click', function () {
+    renderNewPlayer();
+});
 
 log('working');
