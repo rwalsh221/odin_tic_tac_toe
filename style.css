@@ -36,7 +36,7 @@ header {
 
 .heading-primary {
   width: max-content;
-  background-color: blue;
+  /* background-color: blue; */
   display: block;
   margin: 0 auto;
   font-size: 5rem;
@@ -60,6 +60,10 @@ header {
 }
 
 main {
+  
+}
+
+.game-area {
   display: flex;
   height: 75vh;
   /* background-color: cornflowerblue; */
@@ -78,17 +82,34 @@ main {
   margin: 4rem auto;
 }
 
+/* .marker-cross,
+.marker-nought, */
 .gamepiece__cross,
 .gamepiece__nought {
   position: relative;
+  /* flex-basis: 45%; */
+  width: 14.8rem;
+  flex-shrink: 0;
+  /* height: 30%; */
+  height: 14.8rem;
+  border-radius: 2rem;
+  box-shadow: .5rem .5rem 1rem #5a2d14;
+  background-color: #281f0e;
+  border: 2px solid#1b150a;
+}
+
+.gamepiece__empty {
+  position: relative;
   flex-basis: 45%;
+  width: 14.8rem;
   flex-shrink: 0;
   height: 30%;
+  height: 14.8rem;
   border-radius: 2rem;
-  box-shadow: .5rem .5rem 1rem #bda896;
-  background-color: #dbcbbd;
-  border: 2px solid#bbafa5;
-}
+  box-shadow: .5rem .5rem 1rem #5a2d14 inset;
+  /* background-color: #dbcbbd; */
+  border: 2px solid  #87431d;
+ }
 
 .gamepiece__cross {
   /* background-color: cornflowerblue; */
@@ -102,9 +123,9 @@ main {
   left: 22%;
   width: 8rem;
   height: 2rem;
-  background-color:  #290001;
+  background-color: #d89109;
   /* box-shadow: .5rem .5rem 1rem white inset; */
-  border: 3px solid red;
+  /* border: 3px solid red; */
 
 }
 
@@ -113,9 +134,9 @@ main {
   position: absolute;
   width: 2rem;
   height: 12rem;
-  background-color:  #290001;
+  background-color: #d89109;
   /* box-shadow: .5rem .5rem 1rem white inset; */
-  border: 3px solid red;
+  /* border: 3px solid red; */
 
   z-index: 1000;
   top: -150%;
@@ -129,8 +150,8 @@ main {
   width: 8rem;
   height: 12rem;
   border-radius: 100%;
-  background-color:  #290001;
-  border: 3px solid red;
+  background-color:  #d89109;
+  /* border: 3px solid red; */
   /* box-shadow: .5rem .5rem 1rem white inset; */
 
 }
@@ -141,14 +162,14 @@ main {
   width: 6rem;
   height: 8rem;
   border-radius: 100%;
-  background-color: #dbcbbd;
-  border: 3px solid red;
+  background-color: #281f0e;
+  /* border: 3px solid red; */
 
   /* box-shadow: .5rem .5rem 1rem white; */
 
   z-index: 1000;
   top: 17%;
-  left: 9.5%
+  left: 12.5%
 }
 
 .gamepiece__nought {
@@ -163,14 +184,14 @@ main {
   height: 100%;
   border-radius: 2rem;
   border: 2px solid #87431d;
-  box-shadow: 1rem 1rem 1rem #150902 inset;
+  box-shadow: 1rem 1rem 1rem #5a2d14 inset;
   flex-shrink: 0;
 }
 
-.player-one,
+/* .player-one,
 .player-two {
   background-image: linear-gradient(52deg, rgba(152,86,41,1) 0%, rgba(101,37,6,1) 94%);
-}
+} */
 
 .player-one {
 
@@ -205,14 +226,17 @@ main {
 }
 
 .game-grid__square {
-  
+  display: flex;
 }
 
+/*
 .pos-1 {
-  /* background-color: darkred; */
+  background-color: darkred;
 }
 .pos-2 {
   background-color: goldenrod;
+  
+  background-color: #251005;
 }
 .pos-3 {
   background-color: greenyellow;
@@ -235,6 +259,7 @@ main {
 .pos-9 {
   background-color: peachpuff;
 }
+*/
 
 .p-one {
   /* height: 80%;
@@ -253,23 +278,73 @@ main {
 .game-grid__clear {
   height: 100%;
   width: 100%;
-  background-color: #251005;
 }
 
 .game-grid__style {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 2px solid #150902;
   box-shadow: 1rem 1rem 1rem #150902 inset;
+  width: 100%;
+  background-color: #251005;
+
 }
 
-.marker-nought {
+/* .marker-nought {
   height: 100%;
   width: 100%;
   
   background-color: limegreen;
-}
+} */
 
-.marker-cross {
+/* .marker-cross {
   height: 100%;
   width: 100%;
   background-color: blueviolet;
+} */
+
+.icon-star {
+  position: absolute;
+  font-size: 4rem;
+  top: 35%;
+  left: 60%;
+  color: #d89109;
+  fill: #d89109;
+  z-index: 2000;
+}
+
+#new-player-form {
+  display: none;
+  /* display: flex; */
+  width: max-content;
+  font-size: 2rem;
+  /* flex-direction: column; */
+  background-color: chartreuse;
+  position: fixed;
+  top: 30%;
+  left: 39.8%;
+  padding: 5rem;
+  border-radius: 2rem;
+  line-height: 5rem;
+  z-index: 5000;
+}
+
+.new-player {
+ 
+}
+
+.button-container {
+  width: max-content;
+  margin: 0 auto;
+  
+  
+}
+
+.btn {
+  
+}
+
+#body-blur {
+  filter: blur(60px);
 }
