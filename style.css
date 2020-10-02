@@ -1,3 +1,20 @@
+:root {
+  /* BACKGROUND COLOR VARIABLES */
+  --main-bg-color: #ebd4d4;
+  --main-bg-color-light: #fff0f0;
+
+  /* GAMEPIECE COLOR VARIABLES */
+  --gp-bg-color: #29132e;
+  --gp-border-color: #860029;
+  --gb-bg-symbol-color: #860029;
+
+  /* GAMEGRID COLOR VARIABLES */
+  --gg-bg-color: #835858;
+  --gg-bg-edge-color: #463333;
+
+
+}
+
 /* CSS RESET */
 /* https://alligator.io/css/minimal-css-reset/ */
 html {
@@ -27,7 +44,7 @@ html {
 body {
   height: 100vh;
   width: 100%;
-  background-image: linear-gradient(52deg, rgba(152,86,41,1) 0%, rgba(101,37,6,1) 94%);
+  background-image: linear-gradient(52deg, var(--main-bg-color-light) 0%, var(--main-bg-color) 94%);
 }
 
 header {
@@ -67,7 +84,7 @@ main {
   display: flex;
   height: 75vh;
   /* background-color: cornflowerblue; */
-  background-image: linear-gradient(52deg, rgba(152,86,41,1) 0%, rgba(101,37,6,1) 94%);
+  /* background-image: linear-gradient(52deg, rgba(152,86,41,1) 0%, rgba(101,37,6,1) 94%); */
   /* align-items: center; */
   justify-content: center;
 }
@@ -94,8 +111,8 @@ main {
   height: 14.8rem;
   border-radius: 2rem;
   box-shadow: .5rem .5rem 1rem #5a2d14;
-  background-color: #281f0e;
-  border: 2px solid#1b150a;
+  background-color: var(--gp-bg-color);
+  border: 2px solid var(--gp-border-color);
 }
 
 .gamepiece__empty {
@@ -123,7 +140,7 @@ main {
   left: 22%;
   width: 8rem;
   height: 2rem;
-  background-color: #d89109;
+  background-color: var(--gb-bg-symbol-color);
   /* box-shadow: .5rem .5rem 1rem white inset; */
   /* border: 3px solid red; */
 
@@ -134,7 +151,7 @@ main {
   position: absolute;
   width: 2rem;
   height: 12rem;
-  background-color: #d89109;
+  background-color: var(--gb-bg-symbol-color);
   /* box-shadow: .5rem .5rem 1rem white inset; */
   /* border: 3px solid red; */
 
@@ -150,7 +167,7 @@ main {
   width: 8rem;
   height: 12rem;
   border-radius: 100%;
-  background-color:  #d89109;
+  background-color:  var(--gb-bg-symbol-color);
   /* border: 3px solid red; */
   /* box-shadow: .5rem .5rem 1rem white inset; */
 
@@ -162,7 +179,7 @@ main {
   width: 6rem;
   height: 8rem;
   border-radius: 100%;
-  background-color: #281f0e;
+  background-color:var(--gp-bg-color);
   /* border: 3px solid red; */
 
   /* box-shadow: .5rem .5rem 1rem white; */
@@ -205,7 +222,7 @@ main {
   flex-basis: 50%;
   flex-shrink: 0;
   height: 90%;
-  background-color: #5a2d14;
+  background-color: var(--gg-bg-edge-color);
   border: 2px solid #41200e;
   border-radius: 10px;
   box-shadow: 1rem 1rem 1rem #41200e;
@@ -221,7 +238,7 @@ main {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
   gap: 1rem;
-  background-color:  #5a2d14;
+  background-color:  var(--gg-bg-edge-color);
   margin: 1.5rem auto;
 }
 
@@ -287,32 +304,12 @@ main {
   border: 2px solid #150902;
   box-shadow: 1rem 1rem 1rem #150902 inset;
   width: 100%;
-  background-color: #251005;
+  background-color: var(--gg-bg-color);
 
 }
 
-/* .marker-nought {
-  height: 100%;
-  width: 100%;
-  
-  background-color: limegreen;
-} */
 
-/* .marker-cross {
-  height: 100%;
-  width: 100%;
-  background-color: blueviolet;
-} */
 
-.icon-star {
-  position: absolute;
-  font-size: 4rem;
-  top: 35%;
-  left: 60%;
-  color: #d89109;
-  fill: #d89109;
-  z-index: 2000;
-}
 
 #new-player-form {
   display: none;
@@ -342,7 +339,13 @@ main {
 }
 
 .btn {
-  
+  border-radius: 2rem;
+  border: 2px solid var(--gb-bg-symbol-color);
+  padding: 1rem 3rem;
+  /* background-color: #251005; */
+  color: var(--gb-bg-symbol-color);
+  background-color: var(--gp-bg-color);
+
 }
 
 #body-blur {

@@ -1,0 +1,17 @@
+:root {
+    /* BACKGROUND COLOR VARIABLES */
+    --main-bg-color: #652506;
+    --main-bg-color-light: #985629;
+
+    /* GAMEPIECE COLOR VARIABLES */
+    --gp-bg-color: #281f0e;
+    --gp-border-color: #1b150a;
+    --gb-bg-symbol-color: #d89109;
+
+    /* GAMEGRID COLOR VARIABLES */
+    --gg-bg-color: #251005;
+    --gg-bg-edge-color:  #5a2d14;
+
+
+
+}

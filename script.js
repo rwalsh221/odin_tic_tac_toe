@@ -1,11 +1,13 @@
-
+// TODO
 // add turn count
 // add who goes first. start game function
 // feedback to the player
+// draw
 
 const log = console.log;
 
 // DOM STRINGS
+
 const pos1 = document.getElementById('pos-1');
 const pos2 = document.getElementById('pos-2');
 const pos3 = document.getElementById('pos-3');
@@ -158,6 +160,7 @@ const resetGame = (resetBTN) => {
         for(i = 1; i <= 9; i++) {
             
             removeGamePiece(i);
+            // resetGamePiece(i)
             document.getElementById(`pos-${i}`).classList.add('game-grid__clear')
     }
         resetGamePiece();
@@ -172,15 +175,24 @@ const removeGamePiece = (element) => {
         document.getElementById(`pos-${element}`).removeChild(document.getElementById('game-piece'))
     }
 
-    document.getElementById(`pos-${i}`).classList.remove('marker-nought', 'player-one');
-    document.getElementById(`pos-${i}`).classList.remove('marker-cross', 'player-two');
+    document.getElementById(`pos-${element}`).classList.remove('marker-nought', 'player-one');
+    document.getElementById(`pos-${element}`).classList.remove('marker-cross', 'player-two');
 }
 
-const resetGamePiece = (i) => {
+const resetGamePiece = (el) => {
     
     const cross = document.getElementById('gamepiece__container--player-one');
     const nought = document.getElementById('gamepiece__container--player-two');
     
+    // log('resetgamepice')
+    // if (document.getElementById(`pos-${el}`).hasChildNodes()) {
+    //     log('has child nodes')
+    //     document.getElementById(`pos-${el}`).removeChild(document.getElementById('game-piece'))
+    // }
+
+    // document.getElementById(`pos-${el}`).classList.remove('marker-nought', 'player-one');
+    // document.getElementById(`pos-${el}`).classList.remove('marker-cross', 'player-two');
+
     // REMOVE GAMEPIECE FROM BOARD
     while (cross.firstChild) {
         cross.removeChild(cross.lastChild)
