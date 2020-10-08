@@ -268,3 +268,16 @@ document.querySelector('.reset--btn').addEventListener('click', function() {
 });
 
 log('working');
+
+const revString = (str) => {
+    let newArr = []
+    for (i = 0; i <= str.length -1; i++) {
+    newArr.push(str.slice(i, i+1))
+    }
+    newArr.reverse()
+    let newArrStr = newArr.join('');
+    console.log(newArrStr)
+}
+
+revString('Hello my name is lenny')
+revString('i want to go to budapest and prague')

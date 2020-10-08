@@ -1,16 +1,5 @@
 const log = console.log;
 
-// DOM STRINGS
-// const pos1 = document.getElementById('pos-1');
-// const pos2 = document.getElementById('pos-2');
-// const pos3 = document.getElementById('pos-3');
-// const pos4 = document.getElementById('pos-4');
-// const pos5 = document.getElementById('pos-5');
-// const pos6 = document.getElementById('pos-6');
-// const pos7 = document.getElementById('pos-7');
-// const pos8 = document.getElementById('pos-8');
-// const pos9 = document.getElementById('pos-9');
-
 // GLOBAL VARIABLES
 let currentPlayer = 'player-one';
 let winner = false;
@@ -19,6 +8,11 @@ let playerOneScore = 0;
 let playerTwoScore = 0;
 let roundNumber = 1;
 let playerArray = [];
+const gameInfo = document.querySelector('.game__info--content');
+
+// FOR ANIMATE PIECE MOVE
+const elementWidth = document.getElementById(`gamepiece__cross--4`).getBoundingClientRect().width / 2 // 74
+const elementHeight = document.getElementById(`gamepiece__cross--4`).getBoundingClientRect().height / 2 // 74
 
 const playerController = (function () {
 
@@ -50,14 +44,21 @@ const playerController = (function () {
     
     const nextPlayer = () => {
     
+        
+        
+
         playerArray.push(currentPlayer)
             if (currentPlayer === 'player-one') {
                 currentPlayer = 'player-two';
-                log(currentPlayer)
+                gameInfoCurrentPlayer = document.getElementById(`${currentPlayer}__name`);
+               
+                gameInfo.textContent = `${gameInfoCurrentPlayer.innerHTML}! Please place your marker`
                 controller.nextRound();
             } else {
                 currentPlayer = 'player-one';
-                log(currentPlayer)
+                gameInfoCurrentPlayer = document.getElementById(`${currentPlayer}__name`);
+                
+                gameInfo.textContent = `${gameInfoCurrentPlayer.innerHTML}! Please place your marker`
                 controller.nextRound();
             }
     
@@ -67,10 +68,10 @@ const playerController = (function () {
     const activePlayer = (currentPlayer) => {
         if (currentPlayer === 'player-one') {
             document.getElementById('p2__heading').style.color = 'black' 
-            document.getElementById('p1__heading').style.color = 'red' 
+            document.getElementById('p1__heading').style.color = 'var(--gb-bg-symbol-color)' 
         } else {
             document.getElementById('p1__heading').style.color = 'black' 
-            document.getElementById('p2__heading').style.color = 'red' 
+            document.getElementById('p2__heading').style.color = 'var(--gb-bg-symbol-color)' 
         }
     }
 
@@ -80,6 +81,8 @@ const playerController = (function () {
         nextPlayer,
         activePlayer,
     }
+
+    
 
     
 })();
@@ -105,46 +108,91 @@ const UIController = (function () {
     const removeGamePieceCross = (currentRound) => {
         newHtml = `<div class="gamepiece__empty" id="gamepiece__empty"></div>`
     
-        document.getElementById('gamepiece__container--player-one').removeChild(document.getElementById(`gamepiece__cross--${currentRound}`))
+        // document.getElementById('gamepiece__container--player-one').removeChild(document.getElementById(`gamepiece__cross--${currentRound}`))
         document.getElementById('gamepiece__container--player-one').insertAdjacentHTML("afterbegin", newHtml);
         
     }
     
     const removeGamePieceNought = (currentRound) => {
-        newHtml = `<div class="gamepiece__empty" id="gamepiece__empty"></div>`
+        // newHtml = `<div class="gamepiece__empty" id="gamepiece__empty"></div>`
     
-        document.getElementById('gamepiece__container--player-two').removeChild(document.getElementById(`gamepiece__nought--${currentRound}`))
+        // document.getElementById('gamepiece__container--player-two').removeChild(document.getElementById(`gamepiece__nought--${currentRound}`))
         document.getElementById('gamepiece__container--player-two').insertAdjacentHTML("afterbegin", newHtml);
     }
     
     
     // PLACES GAMEPIECE ON BOARD
-    const placeGamePiece = (event) => {
+    const placeGamePiece = (event, currentRound) => {
         
         const HtmlCross = `<div class="gamepiece__cross" id="game-piece"> <div class="gamepiece__cross--symbol"></div> </div>`
         const HtmlNought = `<div class="gamepiece__nought" id="game-piece"> <div class="gamepiece__nought--symbol"></div> </div>`
+        
+
     
         if (winner === false) {
             let posID = event.target.id
             
             if (currentPlayer === 'player-one' && document.getElementById(posID).classList.contains('game-grid__clear')) {
-                removeGamePieceCross(roundNumber);
+                // removeGamePieceCross(roundNumber);
                 
                 document.getElementById(posID).classList.remove('game-grid__clear');
                 document.getElementById(posID).classList.add('marker-cross', currentPlayer);
-                document.getElementById(posID).insertAdjacentHTML('afterbegin', HtmlCross);
+                // document.getElementById(posID).insertAdjacentHTML('afterbegin', HtmlCross);
                 
+                animateMove(posID, elementWidth, elementHeight, 'gamepiece__cross--')
                 controller.checkWin();
+
             } else if (currentPlayer === 'player-two' && document.getElementById(posID).classList.contains('game-grid__clear')) {
-                removeGamePieceNought(roundNumber)
+                // removeGamePieceNought(roundNumber)
                 
                 document.getElementById(posID).classList.remove('game-grid__clear');
                 document.getElementById(posID).classList.add('marker-nought', currentPlayer);
-                document.getElementById(posID).insertAdjacentHTML("afterbegin", HtmlNought);
-                
+                // document.getElementById(posID).insertAdjacentHTML("afterbegin", HtmlNought);
+                animateMove(posID, elementWidth, elementHeight, 'gamepiece__nought--')
                 controller.checkWin();
             }
         }
+    }
+
+    const animateMove = (position, elWidth, elHieght, gamePiece) => {
+        const offsetLeft = document.getElementById(position).getBoundingClientRect().x
+        const offsetWidth = document.getElementById(position).getBoundingClientRect().width
+        
+        
+        const offsetTop = document.getElementById(position).getBoundingClientRect().y
+        const offsetHeight = document.getElementById(position).getBoundingClientRect().height
+
+        const GPoffsetLeft = document.getElementById(`${gamePiece + roundNumber}`).getBoundingClientRect().x
+        log(gamePiece + roundNumber + GPoffsetLeft)
+        const GPoffsetWidth = document.getElementById(`${gamePiece + roundNumber}`).getBoundingClientRect().width
+        log(gamePiece + roundNumber)
+        
+        
+        const GPoffsetTop = document.getElementById(`${gamePiece + roundNumber}`).getBoundingClientRect().y
+        log(gamePiece + roundNumber)
+        const GPoffsetHeight = document.getElementById(`${gamePiece + roundNumber}`).getBoundingClientRect().height
+        log(gamePiece + roundNumber)
+
+        console.log(`${(offsetWidth / 2) + offsetLeft} is the left position!, ${(offsetHeight / 2) + offsetTop } is the top position!`)
+        console.log(elHieght + '-----' + elWidth)
+
+        const xPosition = (((offsetWidth / 2) + offsetLeft) - elWidth) - (((GPoffsetWidth / 2) + GPoffsetLeft) - elWidth) ;
+        const yPosition = (((offsetHeight / 2) + offsetTop) - elHieght) - (((GPoffsetHeight / 2) + GPoffsetTop) - elHieght);
+        console.log(xPosition + '------' + yPosition)
+
+        
+       
+        log(gamePiece + roundNumber)
+        if (gamePiece === 'gamepiece__cross--') {
+            log('cross else')
+            document.getElementById(`gamepiece__cross--${roundNumber}`).classList.add(`click__cross--${roundNumber}`)
+            document.querySelector(`.click__cross--${roundNumber}`).style.transform = `translate(${xPosition}px, ${yPosition}px) rotate(360deg)`
+        } else if (gamePiece === 'gamepiece__nought--') {
+            log('nought else')
+            document.getElementById(`gamepiece__nought--${roundNumber}`).classList.add(`click__nought--${roundNumber}`)
+            document.querySelector(`.click__nought--${roundNumber}`).style.transform = `translate(${xPosition}px, ${yPosition}px) rotate(360deg)`
+        }
+        
     }
 
     const removeGamePiece = (element) => {
@@ -156,25 +204,17 @@ const UIController = (function () {
         document.getElementById(`pos-${element}`).classList.remove('marker-cross', 'player-two');
     }
     
-    const resetGamePiece = (i) => {
+    const resetGamePiece = () => {
         
-        const cross = document.getElementById('gamepiece__container--player-one');
-        const nought = document.getElementById('gamepiece__container--player-two');
-        
-        // REMOVE GAMEPIECE FROM BOARD
-        while (cross.firstChild) {
-            cross.removeChild(cross.lastChild)
-        }
-        while (nought.firstChild) {
-            nought.removeChild(nought.lastChild)
-        }
-        
-        // RESET GAMEPIECE TO CONTAINER
         for (i=1; i<=5; i++) {
-            const htmlCross = `<div id="gamepiece__cross--${i}" class="gamepiece__cross"> <div class="gamepiece__cross--symbol"></div> </div>`
-            const htmlNought = `<div id="gamepiece__nought--${i}" class="gamepiece__nought"> <div class="gamepiece__nought--symbol"></div> </div>`
-            cross.insertAdjacentHTML("afterbegin", htmlCross);
-            nought.insertAdjacentHTML("afterbegin", htmlNought);
+            
+            if(document.getElementById(`gamepiece__cross--${i}`).classList.contains(`click__cross--${i}`)) {
+                document.querySelector(`.click__cross--${i}`).style.transform = `translate(0px, 0px) rotate(720deg)`
+            } 
+            
+            if (document.getElementById(`gamepiece__nought--${i}`).classList.contains(`click__nought--${i}`)) {
+                document.querySelector(`.click__nought--${i}`).style.transform = `translate(0px, 0px) rotate(720deg)`
+            }
         }
     }
 
@@ -203,19 +243,26 @@ const controller = (function (playerCTRL, UICtrl) {
     const isWinner = (draw) => {
         winner = true
         
-        setTimeout(function(){
-            if (!draw) {
-            alert(`${document.getElementById(`${currentPlayer}__name`).textContent} is the winner`)
+        if (!draw) {
+                gameInfo.textContent = `CONGRATULATIONS! ${document.getElementById(`${currentPlayer}__name`).textContent} is the winner`
             } else(
-                alert(`It is a draw`)
+                gameInfo.textContent = `It's a Draw!`
             )
 
-        },500);
-    
+        setTimeout(function(){
+            for (var i = 1; i < 6; i++) {
+                                (function (i) {
+                                  setTimeout(function () {
+                                    gameInfo.textContent = `Next round Starting in ${i}`
+                                  }, 1000*i);
+                                })(i);
+                }
+        },2000)
+
         setTimeout(function(){
             
             resetGame();
-        },5000);
+        },8000);
     }
     
     // RESET GAME FUNCTIONS FOLLOWING WIN, DRAW OR RESET BUTTON PRESS
@@ -232,8 +279,13 @@ const controller = (function (playerCTRL, UICtrl) {
     
         if (winner === true && currentPlayer === 'player-one') {
             currentPlayer = 'player-two'
+            const gameInfoCurrentPlayer = document.getElementById(`${currentPlayer}__name`);
+            gameInfo.textContent = `${gameInfoCurrentPlayer.innerHTML}! Please place your marker`
         } else {
             currentPlayer = 'player-one'
+            const gameInfoCurrentPlayer = document.getElementById(`${currentPlayer}__name`);
+            gameInfo.textContent = `${gameInfoCurrentPlayer.innerHTML}! Please place your marker`
+            
         }
         
         if (winner === true || resetBTN) {
@@ -245,10 +297,7 @@ const controller = (function (playerCTRL, UICtrl) {
             UICtrl.resetGamePiece();
         }
         
-        playerController.activePlayer(currentPlayer)
-        winner = false
-        draw = false
-        roundNumber = 1
+        init();
     }
 
     const checkWin = () => {
@@ -306,10 +355,13 @@ const controller = (function (playerCTRL, UICtrl) {
 
     // OPEN AND CLOSE NEW PLAYER FORM FUNCTIONS
     const openForm = () => {
-        document.getElementById('new-player-form').style.display = 'inline-block'
-        document.querySelectorAll('.body-blur').forEach(function(el) {
+
+        setTimeout(function(){
+            document.getElementById('new-player-form').style.display = 'inline-block'
+            document.querySelectorAll('.body-blur').forEach(function(el) {
             el.style.filter = 'blur(60px)'
-        })
+            })
+        },500)
     }
     
     const closeForm = () => {
@@ -320,7 +372,9 @@ const controller = (function (playerCTRL, UICtrl) {
     }
 
     // BUTTON EVENT LISTENERS
-    document.querySelector('.game-grid').addEventListener('click', UICtrl.placeGamePiece);
+    document.querySelector('.game-grid').addEventListener('click', function () {
+        UICtrl.placeGamePiece(event, roundNumber)
+    });
     document.querySelector('.btn__new-player').addEventListener('click', function () {
         playerCTRL.renderNewPlayer();
         closeForm();
@@ -331,13 +385,30 @@ const controller = (function (playerCTRL, UICtrl) {
         resetGame(true)
     });
 
-    console.log('working');
-
     return {
         nextRound,
         checkWin,
-
     }
+
 })(playerController, UIController)
+
+const init = () => {
+    winner = false
+    draw = false
+    roundNumber = 1
+    const num = Math.floor(Math.random() * 2) + 1
+    if (num === 1) {
+        currentPlayer = 'player-one'
+
+    } else if (num === 2) {
+        currentPlayer = 'player-two'
+    }
+    playerController.activePlayer(currentPlayer);
+    gameInfoCurrentPlayer = document.getElementById(`${currentPlayer}__name`);
+    gameInfo.textContent = `${gameInfoCurrentPlayer.innerHTML}! Please place your marker`
+
+}
+
+init();
 
 console.log('working module')

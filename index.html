@@ -5,24 +5,17 @@
         <link type="text/css" rel="stylesheet" href="style.css">
         
         <title>ODIN PROJECT: TIC-TAC-TOE</title>
-
-        <script type="module" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule="" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.js"></script>
         
     </head>
 
     <body >
         
         <header class="body-blur">
-
             <h1 class="heading-primary">ODIN PROJECT: TIC-TAC-TOE</h1>
-        
-            
         </header>
 
         <main>
-
-        
+            
             <div class="new-player">
                 <form class="new-player-form" id="new-player-form">
                     <label for="player-name" class="player-name">Player Name:</label>
@@ -48,11 +41,11 @@
             <section class="game-area body-blur">
 
                 <section class="section-player player-one">
-                    <h2 class="heading-secondary" id="p1__heading">PLAYER ONE</h2>
+                    <h2 class="heading-secondary" id="p1__heading">CROSSES</h2>
                     <ul class="player-info">
                         <li>NAME: <span id="player-one__name">Jasper</span></li>
                         <li>SCORE: <span id="player-one__score">0</span></li>
-                        <li>MARKER: Cross</li>
+                        <li class="sp__line"></li>
                     </ul>
 
                     <div class="gamepiece__container" id="gamepiece__container--player-one">
@@ -115,11 +108,11 @@
                 </section>
 
                 <section class="section-player player-two">
-                    <h2 class="heading-secondary" id="p2__heading">PLAYER TWO</h2>
+                    <h2 class="heading-secondary" id="p2__heading">NOUGHTS</h2>
                     <ul class="player-info">
                         <li >NAME: <span id="player-two__name">Monty</span></li>
                         <li>SCORE: <span id="player-two__score">0</span></li>
-                        <li>MARKER: Nought</li>
+                        <li class="sp__line"></li>
                     </ul>
 
                     <div  class="gamepiece__container" id="gamepiece__container--player-two">
@@ -147,11 +140,17 @@
                 </section>
             </section>
 
+            <div class="game__info">
+                <p class="game__info--content"></p>
+            </div>
+
 
         </main>
 
         <!-- <script src="script.js"></script> -->
         <script src="module.js"></script>
+        <!-- <script src="moduleold.js"></script> -->
+
 
         <!-- <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script> -->
 
