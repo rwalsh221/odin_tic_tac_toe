@@ -102,6 +102,7 @@ main {
 }
 
 .gamepiece__container {
+  /* position: absolute; */
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -136,9 +137,9 @@ main {
   height: 30%;
   height: 14.8rem;
   border-radius: 2rem;
-  box-shadow: .5rem .5rem 1rem #5a2d14 inset;
-  /* background-color: #dbcbbd; */
-  border: 2px solid  #87431d;
+  box-shadow: .5rem .5rem .5rem #150902 inset;
+  /* background-color: red; */
+  border: 1px solid var(--gp-border-color);
  }
 
 .gamepiece__cross {
@@ -404,4 +405,11 @@ main {
   margin: 0 auto;
   font-size: 3rem;
   color: var(--gb-bg-symbol-color)
+}
+
+.gpe__n1 {
+  position: absolute;
+  left: 79.55%;
+  top: 37%;
+  /* border: 1px solid red; */
 }

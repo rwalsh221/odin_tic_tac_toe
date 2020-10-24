@@ -1,5 +1,10 @@
 const log = console.log;
 
+//todo
+//check global variables
+//tidy and comment
+
+
 // GLOBAL VARIABLES
 let currentPlayer = 'player-one';
 let winner = false;
@@ -249,15 +254,30 @@ const controller = (function (playerCTRL, UICtrl) {
                 gameInfo.textContent = `It's a Draw!`
             )
 
+        // setTimeout(function(){
+        //     for (var i = 1; i < 6; i++) {
+        //                         (function (i) {
+        //                           setTimeout(function () {
+        //                             gameInfo.textContent = `Next round Starting in ${i}`
+        //                           }, 1000*i);
+        //                         })(i);
+        //         }
+        // },2000)
+
+        // https://scottiestech.info/2014/07/01/javascript-fun-looping-with-a-delay/
+        const theLoop = (i) => {
+            setTimeout(function () {
+                log(i)
+                gameInfo.textContent = `Next round Starting in ${i}`
+              if (--i) {          // If i > 0, keep going
+                theLoop(i);       // Call the loop again, and pass it the current value of i
+              }
+            }, 1000);
+          };
         setTimeout(function(){
-            for (var i = 1; i < 6; i++) {
-                                (function (i) {
-                                  setTimeout(function () {
-                                    gameInfo.textContent = `Next round Starting in ${i}`
-                                  }, 1000*i);
-                                })(i);
-                }
-        },2000)
+            theLoop(5);
+        }, 2000)
+          
 
         setTimeout(function(){
             
@@ -393,6 +413,8 @@ const controller = (function (playerCTRL, UICtrl) {
 })(playerController, UIController)
 
 const init = () => {
+    playerOneScore = 0
+    playerTwoScore = 0
     winner = false
     draw = false
     roundNumber = 1
