@@ -1,158 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <link type="text/css" rel="stylesheet" href="style.css">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="style.css">
+    <title>ODIN PROJECT: TIC-TAC-TOE</title>
+
+</head>
+<body>
+      
+    <header class="body-blur">
+        <h1 class="heading-primary">ODIN PROJECT: TIC-TAC-TOE</h1>
+    </header>
+
+    <main>
         
-        <title>ODIN PROJECT: TIC-TAC-TOE</title>
-        
-    </head>
+        <div class="new-player">
+            <form class="new-player-form" id="new-player-form">
+                <label for="player-name" class="player-name">Player Name:</label>
+                <input type="text" id="player-name" name="player-name"><br>
 
-    <body >
-        
-        <header class="body-blur">
-            <h1 class="heading-primary">ODIN PROJECT: TIC-TAC-TOE</h1>
-        </header>
+                <label for="game-piece">Select game piece:</label><br>
+                    <input type="radio" id="radio-piece-cross" name="game-piece">
+                    <label for="radio-piece-cross">Cross</label><br>
+                    <input type="radio" id="radio-piece-nought" name="game-piece">
+                    <label for="radio-piece-nought">Nought</label><br>
 
-        <main>
-            
-            <div class="new-player">
-                <form class="new-player-form" id="new-player-form">
-                    <label for="player-name" class="player-name">Player Name:</label>
-                    <input type="text" id="player-name" name="player-name"><br>
+                <div class="button-container">
+                    <button type="button" class="btn btn__new-player" id="btn__new-player">Create New Player</button>
+                    <button type="button" class="btn btn__close" id="btn__close">CLOSE</button>
+                </div>
+            </form>
 
-                    <label for="game-piece">Select game piece:</label><br>
-                        <input type="radio" id="radio-piece-cross" name="game-piece">
-                        <label for="radio-piece-cross">Cross</label><br>
-                        <input type="radio" id="radio-piece-nought" name="game-piece">
-                        <label for="radio-piece-nought">Nought</label><br>
+        <div class="button-container body-blur">
+            <button class="newplayer--btn btn" id="newplayer--btn">new-player</button>
+            <button class="reset--btn btn" id="reset--btn">reset game</button>
 
-                    <div class="button-container">
-                        <button type="button" class="btn btn__new-player" id="btn__new-player">Create New Player</button>
-                        <button type="button" class="btn btn__close" id="btn__close">CLOSE</button>
+        </div>
+        <section class="game-area body-blur">
+
+            <section class="section-player player-one">
+                <h2 class="heading-secondary" id="p1__heading">CROSSES</h2>
+                <ul class="player-info">
+                    <li>NAME: <span id="player-one__name">Jasper</span></li>
+                    <li>SCORE: <span id="player-one__score">0</span></li>
+                    <li class="sp__line"></li>
+                </ul>
+
+                <div class="gamepiece__container" id="gamepiece__container--player-one">
+                    <div id="gamepiece__cross--1" class="gamepiece__cross">
+                        <div class="gamepiece__cross--symbol"></div>
                     </div>
-                </form>
+                    
 
-            <div class="button-container body-blur">
-                <button class="newplayer--btn btn" id="newplayer--btn">new-player</button>
-                <button class="reset--btn btn" id="reset--btn">reset game</button>
+                    <div id="gamepiece__cross--2" class="gamepiece__cross">
+                        <div class="gamepiece__cross--symbol"></div>
 
-            </div>
-            <section class="game-area body-blur">
-
-                <section class="section-player player-one">
-                    <h2 class="heading-secondary" id="p1__heading">CROSSES</h2>
-                    <ul class="player-info">
-                        <li>NAME: <span id="player-one__name">Jasper</span></li>
-                        <li>SCORE: <span id="player-one__score">0</span></li>
-                        <li class="sp__line"></li>
-                    </ul>
-
-                    <div class="gamepiece__container" id="gamepiece__container--player-one">
-                        <div id="gamepiece__cross--1" class="gamepiece__cross">
-                            <div class="gamepiece__cross--symbol"></div>
-                        </div>
-                        
-
-                        <div id="gamepiece__cross--2" class="gamepiece__cross">
-                            <div class="gamepiece__cross--symbol"></div>
-
-                        </div>
-                        <div id="gamepiece__cross--3" class="gamepiece__cross">
-                            <div class="gamepiece__cross--symbol"></div>
-
-                        </div>
-                        <div id="gamepiece__cross--4" class="gamepiece__cross">
-                            <div class="gamepiece__cross--symbol"></div>
-
-                        </div>
-                        <div id="gamepiece__cross--5" class="gamepiece__cross">
-                            <div class="gamepiece__cross--symbol"></div>
-
-                        </div>
                     </div>
-                </section>
+                    <div id="gamepiece__cross--3" class="gamepiece__cross">
+                        <div class="gamepiece__cross--symbol"></div>
 
-                <section class="section-gameboard">
-
-                    <div class="game-grid" >
-                        <div class="game-grid__square pos-1" id="game-grid__square">
-                            <div id="pos-1" class="game-grid__clear game-grid__style"></div>
-                        </div>
-                        <div class="game-grid__square pos-2" id="game-grid__square" >
-                            <div id="pos-2" class="game-grid__clear game-grid__style"></div>
-                        </div>
-                        <div class="game-grid__square pos-3" id="game-grid__square" >
-                            <div id="pos-3" class="game-grid__clear game-grid__style"></div>
-                        </div>
-                        <div class="game-grid__square pos-4" id="game-grid__square" >
-                            <div id="pos-4" class="game-grid__clear game-grid__style"></div>
-                        </div>
-                        <div class="game-grid__square pos-5" id="game-grid__square">
-                            <div id="pos-5" class="game-grid__clear game-grid__style"></div>
-                        </div>
-                        <div class="game-grid__square pos-6" id="game-grid__square">
-                            <div id="pos-6" class="game-grid__clear game-grid__style"></div>
-                        </div>
-                        <div class="game-grid__square pos-7" id="game-grid__square">
-                            <div id="pos-7" class="game-grid__clear game-grid__style"></div>
-                        </div>
-                        <div class="game-grid__square pos-8" id="game-grid__square">
-                            <div id="pos-8" class="game-grid__clear game-grid__style"></div>
-                        </div>
-                        <div class="game-grid__square pos-9" id="game-grid__square">
-                            <div id="pos-9" class="game-grid__clear game-grid__style"></div>
-                        </div>
                     </div>
+                    <div id="gamepiece__cross--4" class="gamepiece__cross">
+                        <div class="gamepiece__cross--symbol"></div>
 
-                </section>
-
-                <section class="section-player player-two">
-                    <h2 class="heading-secondary" id="p2__heading">NOUGHTS</h2>
-                    <ul class="player-info">
-                        <li >NAME: <span id="player-two__name">Monty</span></li>
-                        <li>SCORE: <span id="player-two__score">0</span></li>
-                        <li class="sp__line"></li>
-                    </ul>
-
-                    <div  class="gamepiece__container" id="gamepiece__container--player-two">
-                        <div id="gamepiece__nought--1" class="gamepiece__nought">
-                            <div  class="gamepiece__nought--symbol"></div>
-                            
-                        </div>
-                        <div id="gamepiece__nought--2" class="gamepiece__nought">
-                            <div class="gamepiece__nought--symbol"></div>
-
-                        </div>
-                        <div id="gamepiece__nought--3" class="gamepiece__nought">
-                            <div class="gamepiece__nought--symbol"></div>
-
-                        </div>
-                        <div id="gamepiece__nought--4" class="gamepiece__nought">
-                            <div class="gamepiece__nought--symbol"></div>
-
-                        </div>
-                        <div id="gamepiece__nought--5" class="gamepiece__nought">
-                            <div class="gamepiece__nought--symbol"></div>
-
-                        </div>
                     </div>
-                </section>
+                    <div id="gamepiece__cross--5" class="gamepiece__cross">
+                        <div class="gamepiece__cross--symbol"></div>
+
+                    </div>
+                </div>
             </section>
 
-            <div class="game__info">
-                <p class="game__info--content"></p>
-            </div>
+            <section class="section-gameboard">
+
+                <div class="game-grid" >
+                    <div class="game-grid__square pos-1" id="game-grid__square">
+                        <div id="pos-1" class="game-grid__clear game-grid__style"></div>
+                    </div>
+                    <div class="game-grid__square pos-2" id="game-grid__square" >
+                        <div id="pos-2" class="game-grid__clear game-grid__style"></div>
+                    </div>
+                    <div class="game-grid__square pos-3" id="game-grid__square" >
+                        <div id="pos-3" class="game-grid__clear game-grid__style"></div>
+                    </div>
+                    <div class="game-grid__square pos-4" id="game-grid__square" >
+                        <div id="pos-4" class="game-grid__clear game-grid__style"></div>
+                    </div>
+                    <div class="game-grid__square pos-5" id="game-grid__square">
+                        <div id="pos-5" class="game-grid__clear game-grid__style"></div>
+                    </div>
+                    <div class="game-grid__square pos-6" id="game-grid__square">
+                        <div id="pos-6" class="game-grid__clear game-grid__style"></div>
+                    </div>
+                    <div class="game-grid__square pos-7" id="game-grid__square">
+                        <div id="pos-7" class="game-grid__clear game-grid__style"></div>
+                    </div>
+                    <div class="game-grid__square pos-8" id="game-grid__square">
+                        <div id="pos-8" class="game-grid__clear game-grid__style"></div>
+                    </div>
+                    <div class="game-grid__square pos-9" id="game-grid__square">
+                        <div id="pos-9" class="game-grid__clear game-grid__style"></div>
+                    </div>
+                </div>
+
+            </section>
+
+            <section class="section-player player-two">
+                <h2 class="heading-secondary" id="p2__heading">NOUGHTS</h2>
+                <ul class="player-info">
+                    <li >NAME: <span id="player-two__name">Monty</span></li>
+                    <li>SCORE: <span id="player-two__score">0</span></li>
+                    <li class="sp__line"></li>
+                </ul>
+
+                <div  class="gamepiece__container" id="gamepiece__container--player-two">
+                    <div id="gamepiece__nought--1" class="gamepiece__nought">
+                        <div  class="gamepiece__nought--symbol"></div>
+                        
+                    </div>
+                    <div id="gamepiece__nought--2" class="gamepiece__nought">
+                        <div class="gamepiece__nought--symbol"></div>
+
+                    </div>
+                    <div id="gamepiece__nought--3" class="gamepiece__nought">
+                        <div class="gamepiece__nought--symbol"></div>
+
+                    </div>
+                    <div id="gamepiece__nought--4" class="gamepiece__nought">
+                        <div class="gamepiece__nought--symbol"></div>
+
+                    </div>
+                    <div id="gamepiece__nought--5" class="gamepiece__nought">
+                        <div class="gamepiece__nought--symbol"></div>
+
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <div class="game__info">
+            <p class="game__info--content"></p>
+        </div>
 
 
-        </main>
+    </main>
 
-        <!-- <script src="script.js"></script> -->
-        <script src="module.js"></script>
-        <!-- <script src="moduleold.js"></script> -->
+    <!-- <script src="script.js"></script> -->
+    <script src="module.js"></script>
+    <!-- <script src="moduleold.js"></script> -->
 
 
-        <!-- <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script> -->
-
-    </body>
+    <!-- <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script> -->
+</body>
 </html>
+
+
