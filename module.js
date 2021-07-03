@@ -17,26 +17,14 @@ const elementHeight =
     .height / 2; // 74
 
 const playerController = (function () {
-  const newPlayerFactory = (name, gamePiece) => {
-    if (gamePiece === 'cross') {
+  const renderNewPlayer = () => {
+    const name = document.getElementById('player-name').value;
+
+    if (document.getElementById('radio-piece-cross').checked === true) {
       document.getElementById('player-one__name').textContent = name;
     } else {
       document.getElementById('player-two__name').textContent = name;
     }
-    return { name, gamePiece };
-  };
-
-  const renderNewPlayer = () => {
-    const name = document.getElementById('player-name').value;
-    let gamePiece;
-
-    if (document.getElementById('radio-piece-cross').checked === true) {
-      gamePiece = 'cross';
-    } else {
-      gamePiece = 'nought';
-    }
-
-    newPlayerFactory(name, gamePiece);
   };
 
   const nextPlayer = () => {
@@ -96,7 +84,7 @@ const UIController = (function () {
   };
 
   // PLACES GAMEPIECE ON BOARD
-  const placeGamePiece = (event, currentRound) => {
+  const placeGamePiece = (event) => {
     const HtmlCross = `<div class="gamepiece__cross" id="game-piece"> <div class="gamepiece__cross--symbol"></div> </div>`;
     const HtmlNought = `<div class="gamepiece__nought" id="game-piece"> <div class="gamepiece__nought--symbol"></div> </div>`;
 
@@ -397,8 +385,8 @@ const controller = (function (playerCTRL, UICtrl) {
   };
 
   // BUTTON EVENT LISTENERS
-  document.querySelector('.game-grid').addEventListener('click', function () {
-    UICtrl.placeGamePiece(event, roundNumber);
+  document.querySelector('.game-grid').addEventListener('click', function (e) {
+    UICtrl.placeGamePiece(e);
   });
   document
     .querySelector('.btn__new-player')
