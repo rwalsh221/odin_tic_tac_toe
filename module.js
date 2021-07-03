@@ -1,5 +1,5 @@
 // GLOBAL VARIABLES
-let currentPlayer = 'player-one';
+let currentPlayer = '';
 let winner = false;
 let draw = false;
 let playerOneScore = 0;
@@ -95,24 +95,6 @@ const UIController = (function () {
     return DOMStrings;
   };
 
-  const removeGamePieceCross = (currentRound) => {
-    newHtml = `<div class="gamepiece__empty" id="gamepiece__empty"></div>`;
-
-    // document.getElementById('gamepiece__container--player-one').removeChild(document.getElementById(`gamepiece__cross--${currentRound}`))
-    document
-      .getElementById('gamepiece__container--player-one')
-      .insertAdjacentHTML('afterbegin', newHtml);
-  };
-
-  const removeGamePieceNought = (currentRound) => {
-    // newHtml = `<div class="gamepiece__empty" id="gamepiece__empty"></div>`
-
-    // document.getElementById('gamepiece__container--player-two').removeChild(document.getElementById(`gamepiece__nought--${currentRound}`))
-    document
-      .getElementById('gamepiece__container--player-two')
-      .insertAdjacentHTML('afterbegin', newHtml);
-  };
-
   // PLACES GAMEPIECE ON BOARD
   const placeGamePiece = (event, currentRound) => {
     const HtmlCross = `<div class="gamepiece__cross" id="game-piece"> <div class="gamepiece__cross--symbol"></div> </div>`;
@@ -125,13 +107,10 @@ const UIController = (function () {
         currentPlayer === 'player-one' &&
         document.getElementById(posID).classList.contains('game-grid__clear')
       ) {
-        // removeGamePieceCross(roundNumber);
-
         document.getElementById(posID).classList.remove('game-grid__clear');
         document
           .getElementById(posID)
           .classList.add('marker-cross', currentPlayer);
-        // document.getElementById(posID).insertAdjacentHTML('afterbegin', HtmlCross);
 
         animateMove(posID, elementWidth, elementHeight, 'gamepiece__cross--');
         controller.checkWin();
@@ -139,13 +118,11 @@ const UIController = (function () {
         currentPlayer === 'player-two' &&
         document.getElementById(posID).classList.contains('game-grid__clear')
       ) {
-        // removeGamePieceNought(roundNumber)
-
         document.getElementById(posID).classList.remove('game-grid__clear');
         document
           .getElementById(posID)
           .classList.add('marker-nought', currentPlayer);
-        // document.getElementById(posID).insertAdjacentHTML("afterbegin", HtmlNought);
+
         animateMove(posID, elementWidth, elementHeight, 'gamepiece__nought--');
         controller.checkWin();
       }
@@ -251,8 +228,6 @@ const UIController = (function () {
   };
 
   return {
-    removeGamePieceCross,
-    removeGamePieceNought,
     placeGamePiece,
     removeGamePiece,
     resetGamePiece,
@@ -330,6 +305,11 @@ const controller = (function (playerCTRL, UICtrl) {
         document.getElementById(`pos-${i}`).classList.add('game-grid__clear');
       }
       UICtrl.resetGamePiece();
+    }
+
+    if (resetBTN) {
+      init(true);
+      return;
     }
 
     init();
@@ -438,19 +418,23 @@ const controller = (function (playerCTRL, UICtrl) {
   };
 })(playerController, UIController);
 
-const init = () => {
+const init = (newGame) => {
   winner = false;
   draw = false;
   roundNumber = 1;
-  const num = Math.floor(Math.random() * 2) + 1;
-  if (num === 1) {
-    currentPlayer = 'player-one';
-  } else if (num === 2) {
-    currentPlayer = 'player-two';
+
+  if (newGame) {
+    const num = Math.floor(Math.random() * 2) + 1;
+    if (num === 1) {
+      currentPlayer = 'player-one';
+    } else if (num === 2) {
+      currentPlayer = 'player-two';
+    }
   }
+
   playerController.activePlayer(currentPlayer);
-  gameInfoCurrentPlayer = document.getElementById(`${currentPlayer}__name`);
+  let gameInfoCurrentPlayer = document.getElementById(`${currentPlayer}__name`);
   gameInfo.textContent = `${gameInfoCurrentPlayer.innerHTML}! Please place your marker`;
 };
 
-init();
+init(true);
