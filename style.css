@@ -304,6 +304,8 @@ main {
   color: var(--gb-bg-symbol-color);
 }
 
+/* MEDIA QUERY ********************************************************************************************************************************************* */
+
 @media screen and (min-width: 2000px) {
   body {
     width: 200rem;
@@ -315,6 +317,34 @@ main {
   .gamepiece__cross,
   .gamepiece__nought {
     height: 10rem;
+  }
+
+  .gamepiece__cross--symbol {
+    top: 23%;
+    left: 22%;
+    width: 60%;
+    height: 20%;
+  }
+
+  .gamepiece__cross--symbol:before {
+    width: 2rem;
+    height: 450%;
+    top: -100%;
+    left: 34%;
+  }
+
+  .gamepiece__nought--symbol {
+    top: 10%;
+    left: 23%;
+    width: 60%;
+    height: 80%;
+  }
+
+  .gamepiece__nought--symbol:before {
+    width: 60%;
+    height: 80%;
+    top: 11%;
+    left: 20.5%;
   }
 }
 
@@ -332,6 +362,10 @@ main {
   .gamepiece__cross,
   .gamepiece__nought {
     width: 18%;
+  }
+
+  .gamepiece__cross--symbol:before {
+    left: 30.7%;
   }
 
   .section-gameboard {
@@ -362,6 +396,11 @@ main {
 @media screen and (max-width: 480px) {
   .game__info--content {
     font-size: 3rem;
+  }
+
+  .gamepiece__cross,
+  .gamepiece__nought {
+    width: 40%;
   }
 }
 
