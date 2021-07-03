@@ -1,5 +1,3 @@
-const log = console.log;
-
 // GLOBAL VARIABLES
 let currentPlayer = 'player-one';
 let winner = false;
@@ -29,13 +27,10 @@ const playerController = (function () {
   };
 
   const renderNewPlayer = () => {
-    log('running');
-
     const name = document.getElementById('player-name').value;
     let gamePiece;
 
     if (document.getElementById('radio-piece-cross').checked === true) {
-      // document.getElementById('player-one__name').textContent = name;
       gamePiece = 'cross';
     } else {
       gamePiece = 'nought';
@@ -158,14 +153,16 @@ const UIController = (function () {
   };
 
   const animateMove = (position, elWidth, elHieght, gamePiece) => {
-    const offsetLeft = document.getElementById(position).getBoundingClientRect()
-      .x;
+    const offsetLeft = document
+      .getElementById(position)
+      .getBoundingClientRect().x;
     const offsetWidth = document
       .getElementById(position)
       .getBoundingClientRect().width;
 
-    const offsetTop = document.getElementById(position).getBoundingClientRect()
-      .y;
+    const offsetTop = document
+      .getElementById(position)
+      .getBoundingClientRect().y;
     const offsetHeight = document
       .getElementById(position)
       .getBoundingClientRect().height;
@@ -173,27 +170,18 @@ const UIController = (function () {
     const GPoffsetLeft = document
       .getElementById(`${gamePiece + roundNumber}`)
       .getBoundingClientRect().x;
-    log(gamePiece + roundNumber + GPoffsetLeft);
+
     const GPoffsetWidth = document
       .getElementById(`${gamePiece + roundNumber}`)
       .getBoundingClientRect().width;
-    log(gamePiece + roundNumber);
 
     const GPoffsetTop = document
       .getElementById(`${gamePiece + roundNumber}`)
       .getBoundingClientRect().y;
-    log(gamePiece + roundNumber);
+
     const GPoffsetHeight = document
       .getElementById(`${gamePiece + roundNumber}`)
       .getBoundingClientRect().height;
-    log(gamePiece + roundNumber);
-
-    console.log(
-      `${offsetWidth / 2 + offsetLeft} is the left position!, ${
-        offsetHeight / 2 + offsetTop
-      } is the top position!`
-    );
-    console.log(elHieght + '-----' + elWidth);
 
     const xPosition =
       offsetWidth / 2 +
@@ -205,11 +193,8 @@ const UIController = (function () {
       offsetTop -
       elHieght -
       (GPoffsetHeight / 2 + GPoffsetTop - elHieght);
-    console.log(xPosition + '------' + yPosition);
 
-    log(gamePiece + roundNumber);
     if (gamePiece === 'gamepiece__cross--') {
-      log('cross else');
       document
         .getElementById(`gamepiece__cross--${roundNumber}`)
         .classList.add(`click__cross--${roundNumber}`);
@@ -217,7 +202,6 @@ const UIController = (function () {
         `.click__cross--${roundNumber}`
       ).style.transform = `translate(${xPosition}px, ${yPosition}px) rotate(360deg)`;
     } else if (gamePiece === 'gamepiece__nought--') {
-      log('nought else');
       document
         .getElementById(`gamepiece__nought--${roundNumber}`)
         .classList.add(`click__nought--${roundNumber}`);
@@ -280,7 +264,7 @@ const controller = (function (playerCTRL, UICtrl) {
   const nextRound = () => {
     if (playerArray.length >= 2) {
       roundNumber++;
-      log(`the round number is ${roundNumber}`);
+
       playerArray = [];
     }
   };
@@ -295,15 +279,18 @@ const controller = (function (playerCTRL, UICtrl) {
       } is the winner`;
     } else gameInfo.textContent = `It's a Draw!`;
 
+    // https://scottiestech.info/2014/07/01/javascript-fun-looping-with-a-delay/
+    const theLoop = (i) => {
+      setTimeout(function () {
+        gameInfo.textContent = `Next round Starting in ${i}`;
+        if (--i) {
+          // If i > 0, keep going
+          theLoop(i); // Call the loop again, and pass it the current value of i
+        }
+      }, 1000);
+    };
     setTimeout(function () {
-      for (var i = 5; i > 0; i--) {
-        (function (i) {
-          setTimeout(function () {
-            gameInfo.textContent = `Next round Starting in ${i}`;
-          }, 1000 * i);
-          console.log('loop', i);
-        })(i);
-      }
+      theLoop(5);
     }, 2000);
 
     setTimeout(function () {
@@ -315,14 +302,12 @@ const controller = (function (playerCTRL, UICtrl) {
   const resetGame = (resetBTN) => {
     if (!resetBTN && !draw && currentPlayer === 'player-one') {
       playerOneScore++;
-      document.getElementById(
-        `${currentPlayer}__score`
-      ).textContent = playerOneScore;
+      document.getElementById(`${currentPlayer}__score`).textContent =
+        playerOneScore;
     } else if (!resetBTN && !draw && currentPlayer === 'player-two') {
       playerTwoScore++;
-      document.getElementById(
-        `${currentPlayer}__score`
-      ).textContent = playerTwoScore;
+      document.getElementById(`${currentPlayer}__score`).textContent =
+        playerTwoScore;
     }
 
     if (winner === true && currentPlayer === 'player-one') {
@@ -352,7 +337,7 @@ const controller = (function (playerCTRL, UICtrl) {
 
   const checkWin = () => {
     const DOM = UICtrl.getDomStrings();
-    console.log(DOM);
+
     // HORIZONTAL WIN*****************************************************************************************************************************
     if (
       document.getElementById(DOM.pos1).classList.contains(currentPlayer) &&
@@ -469,5 +454,3 @@ const init = () => {
 };
 
 init();
-
-console.log('working module');
