@@ -59,7 +59,6 @@ const playerController = (function () {
   };
 
   return {
-    newPlayerFactory,
     renderNewPlayer,
     nextPlayer,
     activePlayer,
