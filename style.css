@@ -304,6 +304,14 @@ main {
   color: var(--gb-bg-symbol-color);
 }
 
+.fixed {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20000;
+}
+
 /* MEDIA QUERY ********************************************************************************************************************************************* */
 
 @media screen and (min-width: 2000px) {

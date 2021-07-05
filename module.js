@@ -6,6 +6,7 @@ let playerOneScore = 0;
 let playerTwoScore = 0;
 let roundNumber = 1;
 let playerArray = [];
+let gameInfoMediaQuery = window.matchMedia('(max-width: 768px)');
 const gameInfo = document.querySelector('.game__info--content');
 
 // FOR ANIMATE PIECE MOVE
@@ -42,7 +43,7 @@ const playerController = (function () {
       gameInfo.textContent = `${gameInfoCurrentPlayer.innerHTML}! Please place your marker`;
       controller.nextRound();
     }
-
+    UIController.positionGameInfo(gameInfoMediaQuery, 1000);
     activePlayer(currentPlayer);
   };
 
@@ -220,11 +221,24 @@ const UIController = (function () {
     }
   };
 
+  const positionGameInfo = (x, timeOut) => {
+    if (x.matches) {
+      document.querySelector('.game__info').classList.toggle('fixed');
+      setTimeout(function () {
+        document.querySelector('.game__info').classList.toggle('fixed');
+      }, timeOut);
+    } else {
+      document.querySelector('.game__info').style.backgroundColor =
+        'var(--main-bg-color)';
+    }
+  };
+
   return {
     placeGamePiece,
     removeGamePiece,
     resetGamePiece,
     getDomStrings,
+    positionGameInfo,
   };
 })();
 
@@ -245,7 +259,11 @@ const controller = (function (playerCTRL, UICtrl) {
       gameInfo.textContent = `CONGRATULATIONS! ${
         document.getElementById(`${currentPlayer}__name`).textContent
       } is the winner`;
-    } else gameInfo.textContent = `It's a Draw!`;
+    } else {
+      gameInfo.textContent = `It's a Draw!`;
+    }
+
+    UIController.positionGameInfo(gameInfoMediaQuery, 11000);
 
     // https://scottiestech.info/2014/07/01/javascript-fun-looping-with-a-delay/
     const theLoop = (i) => {
@@ -417,6 +435,8 @@ const controller = (function (playerCTRL, UICtrl) {
   };
 })(playerController, UIController);
 
+gameInfoMediaQuery.addEventListener('change', UIController.positionGameInfo);
+
 // RESET GLOBAL VARIABLES AND INIT GAME IF GAME CONTINUES
 const initNextRound = function () {
   winner = false;
@@ -426,6 +446,8 @@ const initNextRound = function () {
   playerController.activePlayer(currentPlayer);
   let gameInfoCurrentPlayer = document.getElementById(`${currentPlayer}__name`);
   gameInfo.textContent = `${gameInfoCurrentPlayer.innerHTML}! Please place your marker`;
+
+  UIController.positionGameInfo(gameInfoMediaQuery, 1000);
 };
 
 // INIT GAME ON PAGE LOAD
@@ -440,6 +462,7 @@ const init = () => {
   playerController.activePlayer(currentPlayer);
   let gameInfoCurrentPlayer = document.getElementById(`${currentPlayer}__name`);
   gameInfo.textContent = `${gameInfoCurrentPlayer.innerHTML}! Please place your marker`;
+  UIController.positionGameInfo(gameInfoMediaQuery, 1000);
 };
 
 init();
