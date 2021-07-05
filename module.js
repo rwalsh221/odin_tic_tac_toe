@@ -175,19 +175,25 @@ const UIController = (function () {
     }
   };
 
-  const removeGamePiece = (element) => {
-    if (document.getElementById(`pos-${element}`).hasChildNodes()) {
-      document
-        .getElementById(`pos-${element}`)
-        .removeChild(document.getElementById('game-piece'));
-    }
+  const removeGamePiece = () => {
+    for (let i = 1; i <= 9; i++) {
+      const element = `pos-${i}`;
 
-    document
-      .getElementById(`pos-${element}`)
-      .classList.remove('marker-nought', 'player-one');
-    document
-      .getElementById(`pos-${element}`)
-      .classList.remove('marker-cross', 'player-two');
+      document.getElementById(element).classList.add('game-grid__clear');
+
+      if (document.getElementById(element).hasChildNodes()) {
+        document
+          .getElementById(element)
+          .removeChild(document.getElementById('game-piece'));
+      }
+
+      document
+        .getElementById(element)
+        .classList.remove('marker-nought', 'player-one');
+      document
+        .getElementById(element)
+        .classList.remove('marker-cross', 'player-two');
+    }
   };
 
   const resetGamePiece = () => {
@@ -260,13 +266,13 @@ const controller = (function (playerCTRL, UICtrl) {
     }, 8000);
   };
 
-  // RESET GAME FUNCTIONS FOLLOWING WIN, DRAW OR RESET BUTTON PRESS
-  const resetGameBoard = (resetBTN) => {
-    if (!resetBTN && !draw && currentPlayer === 'player-one') {
+  // RESET GAME FUNCTIONS FOLLOWING WIN OR DRAW
+  const resetGameBoard = () => {
+    if (!draw && currentPlayer === 'player-one') {
       playerOneScore++;
       document.getElementById(`${currentPlayer}__score`).textContent =
         playerOneScore;
-    } else if (!resetBTN && !draw && currentPlayer === 'player-two') {
+    } else if (!draw && currentPlayer === 'player-two') {
       playerTwoScore++;
       document.getElementById(`${currentPlayer}__score`).textContent =
         playerTwoScore;
@@ -287,36 +293,25 @@ const controller = (function (playerCTRL, UICtrl) {
     }
 
     if (winner === true) {
-      for (i = 1; i <= 9; i++) {
-        UICtrl.removeGamePiece(i);
-        document.getElementById(`pos-${i}`).classList.add('game-grid__clear');
-      }
+      UICtrl.removeGamePiece();
       UICtrl.resetGamePiece();
     }
 
-    // if (resetBTN) {
-    //   init(true);
-    //   return;
-    // }
-
-    init();
+    initNextRound();
   };
 
+  // RESET GAME ON RESET BTN PRESS
   const resetBtnPress = () => {
-    console.log(playerOneScore);
     playerOneScore = 0;
     document.getElementById(`player-one__score`).textContent = playerOneScore;
-    console.log(playerOneScore);
+
     playerTwoScore = 0;
     document.getElementById(`player-two__score`).textContent = playerTwoScore;
 
-    for (i = 1; i <= 9; i++) {
-      UICtrl.removeGamePiece(i);
-      document.getElementById(`pos-${i}`).classList.add('game-grid__clear');
-    }
+    UICtrl.removeGamePiece();
     UICtrl.resetGamePiece();
 
-    init(true);
+    init();
   };
 
   const checkWin = () => {
@@ -422,18 +417,24 @@ const controller = (function (playerCTRL, UICtrl) {
   };
 })(playerController, UIController);
 
-const init = (newGame) => {
+// RESET GLOBAL VARIABLES AND INIT GAME IF GAME CONTINUES
+const initNextRound = function () {
   winner = false;
   draw = false;
   roundNumber = 1;
 
-  if (newGame) {
-    const num = Math.floor(Math.random() * 2) + 1;
-    if (num === 1) {
-      currentPlayer = 'player-one';
-    } else if (num === 2) {
-      currentPlayer = 'player-two';
-    }
+  playerController.activePlayer(currentPlayer);
+  let gameInfoCurrentPlayer = document.getElementById(`${currentPlayer}__name`);
+  gameInfo.textContent = `${gameInfoCurrentPlayer.innerHTML}! Please place your marker`;
+};
+
+// INIT GAME ON PAGE LOAD
+const init = () => {
+  const num = Math.floor(Math.random() * 2) + 1;
+  if (num === 1) {
+    currentPlayer = 'player-one';
+  } else if (num === 2) {
+    currentPlayer = 'player-two';
   }
 
   playerController.activePlayer(currentPlayer);
@@ -441,4 +442,4 @@ const init = (newGame) => {
   gameInfo.textContent = `${gameInfoCurrentPlayer.innerHTML}! Please place your marker`;
 };
 
-init(true);
+init();
