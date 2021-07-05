@@ -404,7 +404,7 @@ main {
   }
 
   .gamepiece__cross--symbol:before {
-    left: 30.7%;
+    left: 34%;
   }
 }
 
@@ -424,6 +424,15 @@ main {
   .heading-primary {
     font-size: 3rem;
   }
+
+  .gamepiece__cross,
+  .gamepiece__nought {
+    width: 30%;
+  }
+
+  .gamepiece__cross--symbol:before {
+    left: 34%;
+  }
 }
 @media screen and (max-width: 360px) {
   .game__info--content {
@@ -435,25 +444,7 @@ main {
   .game-grid {
     height: 40rem;
   }
-}
-
-@media screen and (max-width: 480px) {
-}
-
-@media screen and (max-width: 1024px) {
-}
-
-@media screen and (max-width: 1024px) {
-}
-
-@media screen and (max-width: 1024px) {
-}
-
-@media screen and (max-width: 1024px) {
-}
-
-@media screen and (max-width: 1024px) {
-}
-
-@media screen and (max-width: 1024px) {
+  .gamepiece__cross--symbol:before {
+    left: 30.5%;
+  }
 }
