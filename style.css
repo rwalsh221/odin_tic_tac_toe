@@ -402,6 +402,10 @@ main {
   .gamepiece__nought {
     width: 40%;
   }
+
+  .gamepiece__cross--symbol:before {
+    left: 30.7%;
+  }
 }
 
 @media screen and (max-width: 414px) {

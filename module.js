@@ -256,12 +256,12 @@ const controller = (function (playerCTRL, UICtrl) {
     }, 2000);
 
     setTimeout(function () {
-      resetGame();
+      resetGameBoard();
     }, 8000);
   };
 
   // RESET GAME FUNCTIONS FOLLOWING WIN, DRAW OR RESET BUTTON PRESS
-  const resetGame = (resetBTN) => {
+  const resetGameBoard = (resetBTN) => {
     if (!resetBTN && !draw && currentPlayer === 'player-one') {
       playerOneScore++;
       document.getElementById(`${currentPlayer}__score`).textContent =
@@ -286,7 +286,7 @@ const controller = (function (playerCTRL, UICtrl) {
       gameInfo.textContent = `${gameInfoCurrentPlayer.innerHTML}! Please place your marker`;
     }
 
-    if (winner === true || resetBTN) {
+    if (winner === true) {
       for (i = 1; i <= 9; i++) {
         UICtrl.removeGamePiece(i);
         document.getElementById(`pos-${i}`).classList.add('game-grid__clear');
@@ -294,12 +294,29 @@ const controller = (function (playerCTRL, UICtrl) {
       UICtrl.resetGamePiece();
     }
 
-    if (resetBTN) {
-      init(true);
-      return;
-    }
+    // if (resetBTN) {
+    //   init(true);
+    //   return;
+    // }
 
     init();
+  };
+
+  const resetBtnPress = () => {
+    console.log(playerOneScore);
+    playerOneScore = 0;
+    document.getElementById(`player-one__score`).textContent = playerOneScore;
+    console.log(playerOneScore);
+    playerTwoScore = 0;
+    document.getElementById(`player-two__score`).textContent = playerTwoScore;
+
+    for (i = 1; i <= 9; i++) {
+      UICtrl.removeGamePiece(i);
+      document.getElementById(`pos-${i}`).classList.add('game-grid__clear');
+    }
+    UICtrl.resetGamePiece();
+
+    init(true);
   };
 
   const checkWin = () => {
@@ -395,9 +412,9 @@ const controller = (function (playerCTRL, UICtrl) {
     });
   document.querySelector('.newplayer--btn').addEventListener('click', openForm);
   document.querySelector('.btn__close').addEventListener('click', closeForm);
-  document.querySelector('.reset--btn').addEventListener('click', function () {
-    resetGame(true);
-  });
+  document
+    .querySelector('.reset--btn')
+    .addEventListener('click', resetBtnPress);
 
   return {
     nextRound,
