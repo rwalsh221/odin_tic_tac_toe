@@ -206,6 +206,30 @@ main {
   align-self: center;
 }
 
+.gameboard__info {
+  background-color: var(--gg-bg-color);
+  height: 5rem;
+  width: 15%;
+  position: absolute;
+  left: 58.8%;
+  top: 24.3%;
+  box-shadow: 0px 0px 0 1rem var(--gg-bg-edge-color);
+  font-size: 5rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.gameboard__info p {
+  /* background-color: hotpink;
+  margin: 2px solid honeydew;
+  border-radius: 1rem; */
+  margin: 3rem;
+}
+
+.gameboard__info p:first-child {
+  animation: show 5s linear infinite;
+}
+
 .game-grid {
   height: 95%;
   width: 95%;
@@ -310,6 +334,37 @@ main {
   top: 50%;
   transform: translate(-50%, -50%);
   z-index: 20000;
+}
+
+@keyframes show {
+  0% {
+    margin-top: -101px;
+  }
+  /* 0% {
+    margin-top: -270px;
+  }
+  5% {
+    margin-top: -180px;
+  }
+  66% {
+    margin-top: -90px;
+  }
+  71% {
+    margin-top: 0px;
+  } */
+  50% {
+    margin-top: 2px;
+  }
+  100% {
+    margin-top: -101px;
+  }
+
+  /* 99.99% {
+    margin-top: 100px;
+  }
+  100% {
+    margin-top: -100px;
+  } */
 }
 
 /* MEDIA QUERY ********************************************************************************************************************************************* */
