@@ -393,7 +393,6 @@ const controller = (function (playerCTRL, UICtrl) {
       draw = true;
     } else {
       playerCTRL.nextPlayer();
-      document.getElementById('round-number').textContent = roundNumber;
     }
   };
 
@@ -447,10 +446,8 @@ const initNextRound = function () {
   playerController.activePlayer(currentPlayer);
   let gameInfoCurrentPlayer = document.getElementById(`${currentPlayer}__name`);
   gameInfo.textContent = `${gameInfoCurrentPlayer.innerHTML}! Please place your marker`;
-  document.getElementById('active-player').textContent = currentPlayer;
 
   UIController.positionGameInfo(gameInfoMediaQuery, 1000);
-  document.getElementById('round-number').textContent = roundNumber;
 };
 
 // INIT GAME ON PAGE LOAD
@@ -466,8 +463,6 @@ const init = () => {
   let gameInfoCurrentPlayer = document.getElementById(`${currentPlayer}__name`);
   gameInfo.textContent = `${gameInfoCurrentPlayer.innerHTML}! Please place your marker`;
   UIController.positionGameInfo(gameInfoMediaQuery, 1000);
-  document.getElementById('active-player').textContent = currentPlayer;
-  document.getElementById('round-number').textContent = roundNumber;
 };
 
 init();
